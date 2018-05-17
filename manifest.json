@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Simple Browser Extention",
+  "description": "using React, Chrome, and Redux",
+  "version": "0.0.0.1",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "RCR Example",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": [],
+      "js": ["content.js"]
+    }
+  ]
+}
