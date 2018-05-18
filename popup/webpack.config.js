@@ -36,6 +36,15 @@ module.exports = {
           modules: true,
           localIdentName: '[name]__[local]___[hash:base64:5]'
         }
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]'
+          }
+        }
       }
     ]
   }
