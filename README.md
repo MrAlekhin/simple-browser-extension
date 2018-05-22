@@ -4,11 +4,11 @@ The simple chrome extension using React, Redux, Webpack and Gulp
 ### Installing
 
 ```
-$ git clone https://github.com/MrAlekhin/simple-browser-extension.git
+git clone https://github.com/MrAlekhin/simple-browser-extension.git
 
-$ cd react-chrome-redux-boilerplate
+cd react-chrome-redux-boilerplate
 
-$ npm install
+npm install
 
 ```
 
