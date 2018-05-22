@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { selectCountry } from '../../actions/index';
+import _ from 'lodash';
 import {
   Breadcrumb,
   MenuItem,
@@ -9,6 +12,29 @@ import {
 } from 'react-materialize';
 
 class Countries extends Component {
+  //renders the list of countries
+  renderCountries() {
+    return _.map(this.props.countries, ({ name }, index) => {
+      if (index === this.props.selectedCountry) {
+        return (
+          <CollectionItem key={index} active>
+            {name}
+          </CollectionItem>
+        );
+      }
+      return (
+        <CollectionItem
+          key={index}
+          onClick={() => {
+            this.props.selectCountry(index);
+          }}
+        >
+          {name}
+        </CollectionItem>
+      );
+    });
+  }
+
   render() {
     return (
       <div>
@@ -19,26 +45,17 @@ class Countries extends Component {
           <MenuItem>Countries</MenuItem>
         </Breadcrumb>
 
-        <Collection style={{ margin: 0 }}>
-          <CollectionItem href="#">Canada</CollectionItem>
-          <CollectionItem href="#" active>
-            United States
-          </CollectionItem>
-          <CollectionItem href="#">Mexico</CollectionItem>
-          <CollectionItem href="#">United Kingdom</CollectionItem>
-          <CollectionItem href="#">France</CollectionItem>
-        </Collection>
-        <Button
-          floating
-          large
-          className="grey darken-2"
-          waves="light"
-          icon="save"
-          style={{ position: 'fixed', bottom: '10px', right: '10px' }}
-        />
+        <Collection style={{ margin: 0 }}>{this.renderCountries()}</Collection>
       </div>
     );
   }
 }
 
-export default Countries;
+function mapStateToProps({ login }, state) {
+  return {
+    countries: login.countries,
+    selectedCountry: login.selectedCountry
+  };
+}
+
+export default connect(mapStateToProps, { selectCountry })(Countries);

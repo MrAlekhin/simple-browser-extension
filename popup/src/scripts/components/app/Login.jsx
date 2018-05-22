@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
-import * as action from '../../actions';
+import { login } from '../../actions/index';
 
 class Login extends Component {
   constructor(props) {
@@ -14,16 +13,25 @@ class Login extends Component {
       password: ''
     };
 
+    this.muVar;
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ isLoading: true });
-
-    this.props.login(this.state).then(res => {
-      this.setState({ isLoading: false });
-    });
+    this.setState({ error: null, isLoading: true });
+    this.myVar = setTimeout(() => {
+      this.props.login(this.state).then(() => {
+        this.setState({ isLoading: false });
+        if (!this.props.isLogin) {
+          this.setState({
+            error:
+              'Sorry there is no such account. Check username and password are correct.'
+          });
+        }
+      });
+    }, 3000);
   }
 
   handUsernameChange(e) {
@@ -38,10 +46,44 @@ class Login extends Component {
     });
   }
 
+  renderRedirect() {
+    if (this.props.isLogin) {
+      return <Redirect to="/" />;
+    }
+  }
+
+  renderLoading() {
+    if (this.state.isLoading) {
+      return (
+        <div className="row">
+          <div className="progress">
+            <div className="indeterminate" />
+          </div>
+          <button
+            style={{ position: 'fixed', bottom: '10px', right: '10px' }}
+            className="btn waves-effect waves-light"
+            onClick={() => {
+              this.myVar = clearTimeout(this.myVar);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      );
+    }
+  }
+
+  renderError() {
+    if (this.state.error) {
+      return <p>{this.state.error.toString()}</p>;
+    }
+  }
+
   render() {
     const { isLoading } = this.state;
     return (
       <div className="row">
+        {this.renderRedirect()}
         <h4>Sign in</h4>
         <form onSubmit={this.handleSubmit} className="col s12">
           <div className="row">
@@ -75,18 +117,16 @@ class Login extends Component {
               Login
             </button>
           </div>
+          {this.renderError()}
+          {this.renderLoading()}
         </form>
       </div>
     );
   }
 }
-const mapDispatchToProps = function(dispatch) {
-  return bindActionCreators(
-    {
-      login: action.login
-    },
-    dispatch
-  );
-};
 
-export default connect(null, mapDispatchToProps)(Login);
+function mapStateToProps({ login }) {
+  return { isLogin: login.isLogin };
+}
+
+export default connect(mapStateToProps, { login })(withRouter(Login));

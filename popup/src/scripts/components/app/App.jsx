@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as action from '../../actions';
+import { fetchUser } from '../../actions/index';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import styles from './style/index.css';
 
@@ -14,19 +14,13 @@ import Header from '../Header';
 import Countries from './Countries';
 import Login from './Login';
 import Main from './Main';
-import ErrorPage from './ErrorPage';
-import Loading from './Loading';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
-
   //checked result from session (if no account "false", redirects to login page)
   checkLogin() {
     console.log(this.props.auth);
     if (!this.props.auth) {
-      <Redirect to="/login" />;
+      return <Redirect to="/login" />;
     }
   }
   render() {
@@ -37,8 +31,6 @@ class App extends Component {
           <Route exact path="/" component={Main} />
           <Route path="/login" component={Login} />
           <Route path="/countries" component={Countries} />
-          <Route path="/error" component={ErrorPage} />
-          <Route path="/loading" component={Loading} />
           {this.checkLogin()}
         </div>
       </Router>
@@ -47,18 +39,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
-  console.log(state.auth);
-  return { auth: state.auth };
+  return { auth: state.login.isLogin };
 }
 
-const mapDispatchToProps = function(dispatch) {
-  return bindActionCreators(
-    {
-      fetchUser: action.fetchUser
-    },
-    dispatch
-  );
-};
-
-export default connect(mapStateToProps, action)(App);
+export default connect(mapStateToProps)(App);

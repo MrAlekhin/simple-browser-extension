@@ -1,21 +1,36 @@
 import data from '../data.js';
 
 const initialState = {
-  isLogin: data.isLogin
+  isLogin: data.isLogin,
+  countries: data.countries,
+  selectedCountry: data.selectedCountryIndex
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case 'MATCH_USER': {
+    case 'LOGIN_USER': {
       if (
-        data.account.username === action.data.username &&
-        data.account.password === action.data.password
+        data.account.username === action.payload.username &&
+        data.account.password === action.payload.password
       ) {
-        sessionStorage.setItem('account', data.account.username);
         return Object.assign({}, ...state, {
-          isLogin: true
+          isLogin: true,
+          countries: data.countries,
+          selectedCountry: data.selectedCountryIndex
         });
       }
+    }
+    case 'LOGOUT_USER': {
+      return Object.assign({}, ...state, {
+        isLogin: false
+      });
+    }
+    case 'SELECT_COUNTRY': {
+      return {
+        isLogin: true,
+        countries: data.countries,
+        selectedCountry: action.payload
+      };
     }
     default:
       return state;

@@ -15,7 +15,7 @@ class CountryCard extends Component {
               <p>
                 <b>Selected Country:</b>
               </p>
-              <p>United States</p>
+              <p>{this.props.selectedCountry.name}</p>
             </div>
             <div className="card-action">
               <Link to="/countries">Change country</Link>
