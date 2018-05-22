@@ -4,16 +4,16 @@ The simple chrome extension using React, Redux, Webpack and Gulp
 ### Installing
 
 ```
-git clone https://github.com/MrAlekhin/simple-browser-extension.git
+$ git clone https://github.com/MrAlekhin/simple-browser-extension.git
 
-cd react-chrome-redux-boilerplate
+$ cd react-chrome-redux-boilerplate
 
-npm install
+$ npm install
 
 ```
 
 ### Begin by running command:
-
+	$ npm install gulp
 	$ gulp watch
   
   KEEP YOUR TERMINAL WINDOW OPEN AFTER RUNNING THIS COMMAND!
