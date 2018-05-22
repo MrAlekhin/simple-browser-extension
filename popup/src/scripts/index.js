@@ -6,12 +6,12 @@ import App from './components/app/App';
 import { Store } from 'react-chrome-redux';
 import { Provider } from 'react-redux';
 
-const proxyStore = new Store({
+const store = new Store({
   portName: 'example'
 });
-proxyStore.ready().then(() => {
+store.ready().then(() => {
   render(
-    <Provider store={proxyStore}>
+    <Provider store={store}>
       <App />
     </Provider>,
     document.getElementById('app')

@@ -1,12 +1,15 @@
-import { createStore } from 'redux';
-import rootReducer from './reducers';
-import data from './data';
-localStorage.setItem('account', data);
-console.log(localStorage);
+import { applyMiddleware, createStore } from 'redux';
+import reducers from './reducers';
 
-import { wrapStore } from 'react-chrome-redux';
+import { alias, wrapStore } from 'react-chrome-redux';
 
-const store = createStore(rootReducer, {});
+const aliases = {
+  'user-login': () => {
+    chrome.notifications.create('user login');
+  }
+};
+
+const store = createStore(reducers, applyMiddleware(alias(aliases)));
 
 wrapStore(store, {
   portName: 'example'

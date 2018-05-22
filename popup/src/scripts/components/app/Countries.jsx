@@ -20,16 +20,13 @@ class Countries extends Component {
         </Breadcrumb>
 
         <Collection style={{ margin: 0 }}>
-          <CollectionItem href="#">Alvin</CollectionItem>
+          <CollectionItem href="#">Canada</CollectionItem>
           <CollectionItem href="#" active>
-            Alvin
+            United States
           </CollectionItem>
-          <CollectionItem href="#">Alvin</CollectionItem>
-          <CollectionItem href="#">Alvin</CollectionItem>
-          <CollectionItem href="#">Alvin</CollectionItem>
-          <CollectionItem href="#">Alvin</CollectionItem>
-          <CollectionItem href="#">Alvin</CollectionItem>
-          <CollectionItem href="#">Alvin</CollectionItem>
+          <CollectionItem href="#">Mexico</CollectionItem>
+          <CollectionItem href="#">United Kingdom</CollectionItem>
+          <CollectionItem href="#">France</CollectionItem>
         </Collection>
         <Button
           floating

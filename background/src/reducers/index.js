@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
-import count from './count';
 import authReducer from './authReducer';
-import { reducer as reduxForm } from 'redux-form';
+import loginReducer from './loginReducer';
 
 export default combineReducers({
-  count,
   auth: authReducer,
-  form: reduxForm
+  login: loginReducer
 });

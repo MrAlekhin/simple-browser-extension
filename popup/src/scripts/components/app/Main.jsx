@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import CountryCard from '../CountryCard';
 import LogoutButton from '../LogoutButton';
 
@@ -13,6 +14,10 @@ class Main extends Component {
       </div>
     );
   }
+}
+
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default Main;

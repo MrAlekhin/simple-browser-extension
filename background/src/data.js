@@ -1,4 +1,4 @@
-const DATA = {
+export default {
   account: { username: 'user1', password: '123456' },
   countries: [
     { name: 'Canada' },
@@ -8,7 +8,6 @@ const DATA = {
     { name: 'France' }
   ],
   selectedCountryIndex: -1,
-  options: ['Help', 'About', 'Settings', 'Advanced']
+  options: ['Help', 'About', 'Settings', 'Advanced'],
+  isLogin: false
 };
-
-export default DATA;

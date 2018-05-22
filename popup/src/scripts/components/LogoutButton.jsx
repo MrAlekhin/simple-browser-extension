@@ -6,9 +6,9 @@ class LogoutButton extends Component {
   render() {
     return (
       <div>
-        <Button waves="light" node={Link} to="/login">
-          Logout
-        </Button>
+        <Link to="/login">
+          <Button waves="light">Logout</Button>
+        </Link>
       </div>
     );
   }
